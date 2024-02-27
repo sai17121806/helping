@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in</title>
+    <style>
+        body {
+            overflow: hidden;
+        }
+
+        .myvideo {
+            position: fixed;
+            width: 100%;
+            min-height: 100%;
+            right: 0;
+            bottom: 0;
+            z-index: -10;
+        }
+
+        .logo {
+            position: relative;
+            left: 41%;
+        }
+
+        #logo-img {
+            padding: 10px;
+            width: 200px;
+            mix-blend-mode: screen;
+            position: relative;
+            left: -150px;
+            visibility: hidden;
+        }
+
+        #title {
+            text-transform: uppercase;
+            background-image: linear-gradient(-225deg,
+                    orange 0%,
+                    black 50%,
+                    orange 100%);
+            background-size: auto auto;
+            background-clip: border-box;
+            background-size: 200% auto;
+            color: #fff;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textclip 2s linear infinite;
+            display: inline-block;
+            font-size: 15px;
+            font-weight: bolder;
+            position: relative;
+            left: 20px;
+        }
+
+
+        @keyframes textclip {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        .main {
+            position: relative;
+            top: 1px;
+            left: 37%;
+            width: 300px;
+            height: 400px;
+            border-radius: 10px;
+            border: 1px solid orange;
+            backdrop-filter: blur(3px);
+            padding: 10px;
+            box-shadow: 0px 0px 5px orange;
+        }
+
+        .options {
+            border: 1px solid orange;
+            border-radius: 20px;
+            height: 40px;
+            background: none;
+            box-shadow: 0px 0px 5px orange;
+        }
+
+        .btn1,
+        .btn2 {
+            display: inline;
+            position: relative;
+            padding: 12px;
+            width: 147px;
+            left: 0px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            text-transform: capitalize;
+            font-family: sans-serif;
+            font-size: 14px;
+        }
+
+        .btn1 {
+            color: black;
+            background: orange;
+            box-shadow: 0px 0px 5px orange;
+        }
+
+        .change-btn1 {
+            background: transparent;
+            color: white;
+            box-shadow: none;
+        }
+
+        .btn2 {
+            background: transparent;
+            color: white;
+            left: 2px;
+        }
+
+        .change-btn2 {
+            color: black;
+            background: orange;
+            box-shadow: 0px 0px 5px orange;
+        }
+
+        h2 {
+            text-align: center;
+            text-transform: uppercase;
+            text-decoration: underline;
+            color: orange;
+            text-shadow: 0px 0px 2px;
+        }
+
+        input {
+            outline: orange;
+            color: orange;
+        }
+
+        #username,
+        #password {
+            height: 30px;
+            width: 290px;
+            margin: 0px;
+            border: 1px solid orange;
+            border-radius: 5px;
+            background: transparent;
+            z-index: 2;
+            color: orange;
+            box-shadow: 0px 0px 5px orange;
+            padding-left: 10px;
+        }
+
+        .user,
+        .pass {
+            text-transform: uppercase;
+            position: relative;
+            color: #fff;
+            opacity: .4;
+            font-family: Arial, Helvetica, sans-serif;
+            top: 35px;
+            font-size: 12px;
+            left: 10px;
+            z-index: 0;
+            transition: .5s;
+        }
+
+        .move {
+            left: 0px;
+            top: 0px;
+            font-size: 14px;
+            opacity: .8;
+            color: orange;
+        }
+
+        #sp {
+            position: relative;
+            left: 0px;
+            top: 20px;
+            accent-color: orange;
+            color: orange;
+            font-family: Arial, Helvetica, sans-serif;
+            text-transform: capitalize;
+            font-size: 12px;
+        }
+
+        #show {
+            position: relative;
+            top: 2px;
+            width: 14px;
+            color: orange;
+        }
+
+        #forgot {
+            color: orange;
+            text-decoration: none;
+            position: relative;
+            left: 70px;
+            font-family: Arial, Helvetica, sans-serif;
+            text-transform: capitalize;
+            font-size: 12px;
+            top: 20px;
+        }
+
+        #forgot:hover {
+            text-decoration: underline;
+        }
+
+        #login-btn,
+        #sign-btn,
+        #verify {
+            color: black;
+            background: orange;
+            position: relative;
+            width: 290px;
+            top: 70px;
+            height: 40px;
+            border: none;
+            border-radius: 5px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        #login-btn:hover,
+        #sign-btn:hover,
+        #verify:hover {
+            background-color: transparent;
+            border: 1px solid orange;
+            color: orange;
+        }
+
+        .temp {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+
+        .login {
+            position: absolute;
+            height: 350px;
+            top: none;
+            scale: 1;
+            visibility: visible;
+            transition: .5s;
+        }
+
+        .openLogin {
+            visibility: hidden;
+            scale: .1;
+            top: 60px;
+        }
+
+        .sign {
+            visibility: hidden;
+            scale: .1;
+            top: 60px;
+            transition: .5s;
+        }
+
+        .openSign {
+            visibility: visible;
+            scale: 1;
+            top: none;
+        }
+
+        #firstName,
+        #lastName,
+        #eon,
+        #newPass,
+        #confirmPass {
+            width: 135px;
+            height: 35px;
+            margin: 10px 3px;
+            background: transparent;
+            border: 1px solid orange;
+            border-radius: 5px;
+            padding: 2px 0px 0px 5px;
+            box-shadow: 0px 0px 5px orange;
+        }
+
+        #eon,
+        #newPass,
+        #confirmPass {
+            width: 290px;
+        }
+
+        #sign-btn {
+            width: 300px;
+            top: 10px;
+        }
+
+        .otp {
+            width: 350px;
+            border: 1px solid orange;
+            padding: 10px;
+            height: 200px;
+            position: relative;
+            left: 35.4%;
+            top: -320px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 5px orange;
+            backdrop-filter: blur(10px);
+        }
+
+        .open-blur {
+            filter: blur(7px);
+        }
+
+        #otp::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+
+        #otp-msg,
+        #otp-num,
+        #resend,
+        #timer {
+            position: relative;
+            top: 20px;
+            display: inline;
+            font-family: sans-serif;
+            color: orange;
+            width: 100px;
+        }
+
+        #otp-num {
+            color: yellow;
+            font-size: 14px;
+        }
+
+        .otp1 {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            position: relative;
+            padding: 17px;
+            font-size: 14px;
+            top: 40px;
+            margin: 3px;
+            color: orange;
+            border: 1px solid orange;
+            border-radius: 5px;
+            background: transparent;
+        }
+
+        .otp {
+            visibility: hidden;
+        }
+
+        #resend,
+        #timer {
+            top: 60px;
+        }
+
+        #timer {
+            color: yellow;
+            font-size: 15px;
+        }
+
+        #verify {
+            width: 350px;
+        }
+
+        #matched {
+            color: yellow;
+            padding-left: 10px;
+            font-family: monospace;
+        }
+
+        #verified {
+            position: absolute;
+            top: 40.5%;
+            left: 35%;
+            display: none;
+            cursor: pointer;
+        }
+
+        #verified img {
+            width: 370px;
+            border-radius: 10px;
+            margin: 5px 10px;
+            box-shadow: 0px 0px 10px orange;
+        }
+
+        h4 {
+            color: red;
+            margin-top: 80px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            position: relative;
+            left: 32%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="temp" onclick="moveBack()"></div>
+    <video src="/public/videos/video2.mp4" autoplay muted loop id="myvideo" class="myvideo"></video>
+    <div class="logo" id="logo">
+        <h1 id="title">HELPING HANDS</h1>
+        <img src="/public/images/logo.jpg" id="logo-img">
+    </div>
+    <div class="main" id="main">
+        <div class="options">
+            <button id="btn1" class="btn1" onclick="openLogin(1)">Log in</button>
+            <button id="btn2" class="btn2" onclick="openLogin(2)">Sign up</button>
+        </div>
+        <form method="post" action="/home">
+            <div class="login" id="login">
+                <h2>Login</h2>
+                <p id="user" class="user" onclick="moveUser()">username</p>
+                <input type="text" id="username" onclick="moveUser()" name="email" value="">
+                <p id="pass" class="pass" onclick="movePass()">password</p>
+                <input type="password" id="password" onclick="movePass()" name="password" value="">
+                <label for="show" id="sp"><input type="checkbox" id="show">Show password</label>
+                <button id="login-btn" type="submit">login</button>
+                <%if(wrongemail==1){%>
+                    <h4>Invalid Email</h4>
+                    <%}%>
+                        <%if(wrongpassword==1){%>
+                            <h4>Invalid Password</h4>
+                            <%}%>
+            </div>
+        </form>
+        <form method="post" action="/home">
+            <div class="sign" id="sign">
+                <h2>sign up</h2>
+                <input type="text" id="firstName" placeholder="Enter firstName" name="firstname" value="">
+                <input type="text" id="lastName" placeholder="Enter lastName" name="lastname" value="">
+                <input type="email" id="eon" placeholder="Enter email or mobile number" name="email" value="">
+                <input type="password" id="newPass" placeholder="New password" name="newpassword" value="">
+                <input type="password" id="confirmPass" placeholder="Confirm password" name="confirmpassword" value="">
+                <p id="matched"></p>
+                <button id="sign-btn" onclick="sendOTP(1)" type="submit">sign up</button>
+                <%if(alreadyemail==1){%>
+                    <h4>Email Already Registered</h4>
+                    <%}%>
+            </div>
+    </div>
+    </form>
+    <form method="post" action="/home">
+        <div class="otp" id="otp">
+            <div id="msg">
+                <p id="otp-msg">Enter OTP</p>
+            </div>
+            <input type="text" maxlength="1" class="otp1" onkeypress="onkeypress(event , 1);" id="tb1" name="n1" value=""/>
+            <input type="text" maxlength="1" class="otp1" onkeypress="onkeypress(event , 2);" id="tb2" name="n2" value=""/>
+            <input type="text" maxlength="1" class="otp1" onkeypress="onkeypress(event , 3);" id="tb3" name="n3" value=""/>
+            <input type="text" maxlength="1" class="otp1" onkeypress="onkeypress(event , 4);" id="tb4" name="n4" value=""/>
+            <input type="text" maxlength="1" class="otp1" onkeypress="onkeypress(event , 5);" id="tb5" name="n5" value="" />
+            <input type="text" maxlength="1" class="otp1" id="tb6" name="n6" value=""/>
+            <button id="verify" onclick="sendOTP(2)" type="submit">Verify</button>
+        </div>
+    </form>
+
+    <script>
+        let user = document.getElementById("user");
+        let username = document.getElementById("username");
+        let pass = document.getElementById("pass");
+        let password = document.getElementById("password");
+        let login = document.getElementById("login");
+        let sign = document.getElementById("sign");
+        let btn1 = document.getElementById("btn1");
+        let btn2 = document.getElementById("btn2");
+        let main = document.getElementById("main");
+        let myvideo = document.getElementById("myvideo");
+        let otp = document.getElementById("otp");
+        let logo = document.getElementById("logo");
+        let resend = document.getElementById("resend");
+        let timer = document.getElementById("timer");
+        let newPass = document.getElementById("newPass");
+        let confirmPass = document.getElementById("confirmPass");
+        let show = document.getElementById("show");
+        var a = [];
+        a[0] = document.getElementById("tb1");
+        a[1] = document.getElementById("tb2");
+        a[2] = document.getElementById("tb3");
+        a[3] = document.getElementById("tb4");
+        a[4] = document.getElementById("tb5");
+        a[5] = document.getElementById("tb6");
+
+        function onKeyPress(args, x) {
+            if (args.keyCode === 13)
+                a[x].focus();
+        }
+
+        function moveUser() {
+            user.classList.add("move");
+            if (password.value == "")
+                pass.classList.remove("move");
+        }
+
+        function movePass() {
+            pass.classList.add("move");
+            if (username.value == "")
+                user.classList.remove("move");
+        }
+
+        function moveBack() {
+            if (password.value == "")
+                pass.classList.remove("move");
+            if (username.value == "")
+                user.classList.remove("move");
+        }
+
+
+        document.getElementById('show').addEventListener('change', () => {
+            if (show.checked)
+                password.type = "text";
+            else
+                password.type = "password";
+        });
+
+        function openLogin(x) {
+            if (x == 1) {
+                btn1.classList.remove("change-btn1");
+                btn2.classList.remove("change-btn2");
+                login.classList.remove("openLogin");
+                sign.classList.remove("openSign");
+                main.style.height = "400px";
+                document.getElementById("matched").innerHTML = "";
+                newPass.value = "";
+                confirmPass.value = "";
+            }
+            else {
+                btn1.classList.add("change-btn1");
+                btn2.classList.add("change-btn2");
+                sign.classList.add("openSign");
+                login.classList.add("openLogin");
+                main.style.height = "410px";
+            }
+            moveBack();
+        }
+
+        y = 0;
+        let i = 30;
+        function sendOTP(x) {
+            i = 30;
+            if (newPass.value != confirmPass.value) {
+                document.getElementById("matched").innerHTML = "Password not matched";
+                main.style.height = "450px";
+            }
+            else {
+                main.style.height = "410px";
+                document.getElementById("matched").innerHTML = "";
+                if (x == 1) {
+                    var timeOut = setInterval(setTimer, 1000);
+                    main.classList.add("open-blur");
+                    myvideo.classList.add("open-blur");
+                    logo.classList.add("open-blur");
+                    document.getElementById("otp").style.visibility = "visible";
+                    timer.style.visibility = "visible";
+                    let mail = document.getElementById("eon").value;
+                    document.getElementById("otp-num").innerHTML = mail;
+                }
+                else if (x == 2) {
+                    document.getElementById("verified").style.display = "block";
+                }
+                else {
+                    clearInterval(timeOut);
+                }
+            }
+        }
+
+        function setTimer() {
+            if (i < 0) {
+                resend.innerHTML = "Resend";
+                resend.style.color = "white";
+                timer.style.visibility = "hidden";
+                sendOTP(3);
+            }
+            else {
+                timer.innerHTML = i;
+                i--;
+            }
+        }
+
+        function resent() {
+            if (resend.style.color == "white") {
+                timer.style.visibility = "visible";
+                resend.style.color = "orange";
+                resend.innerHTML = "Resend OTP in ";
+                i = 30;
+            }
+        }
+    </script>
+</body>
+
+</html>
